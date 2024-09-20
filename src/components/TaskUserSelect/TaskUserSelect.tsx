@@ -1,7 +1,7 @@
 import React, { ChangeEvent, Component } from "react";
 import { IUser } from "../../types/User.types";
 import { BASE_URL } from "../../utils/constants";
-import "./TaskUserSelect.css"
+import "./TaskUserSelect.css";
 
 interface IUserSelectProps {
   onSelect: (userId: number) => void;
@@ -42,7 +42,10 @@ class TaskUserSelect extends Component<IUserSelectProps, IUserSelectState> {
 
   componentDidMount(): void {
     this.fetchUsers()
-      .then((users) => this.setState({ users }))
+      .then((users: IUser[]) => {
+        this.setState({ users });
+        this.props.onSelect(+users[0].id);
+      })
       .catch((e: Error) => {
         console.log("User fetch error " + e);
       });
