@@ -32,3 +32,37 @@ export async function addTask(task: CreateTaskType): Promise<ITask> {
     throw e;
   }
 }
+
+export async function deleteTask(id: number): Promise<void> {
+  try {
+    const res: Response = await fetch(`${BASE_URL}/todos/${id}`, {
+      method: "DELETE",
+    });
+    if (res.ok) {
+      return;
+    } else {
+      throw new Error(`Deleting task failed with ${res.status} ${res.statusText}`);
+    }
+  } catch (e) {
+    console.log("Delete task error: ", e);
+    throw e;
+  }
+}
+
+export async function updateTask(task: ITask): Promise<ITask> {
+  try {
+    const res: Response = await fetch(`${BASE_URL}/todos/${task.id}`, {
+      method: "PATCH",
+      body: JSON.stringify({
+        title: task.title,
+        completed: task.completed,
+        userId: task.userId,
+      }),
+      headers: { "Content-type": "application/json; charset=UTF-8" },
+    });
+    return res.json() as Promise<ITask>;
+  } catch (e) {
+    console.log("Update task error: ", e);
+    throw e;
+  }
+}
