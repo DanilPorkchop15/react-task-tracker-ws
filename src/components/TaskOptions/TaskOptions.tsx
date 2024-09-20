@@ -32,8 +32,8 @@ class TaskOptions extends Component<ITaskProps, ITaskState> {
   render(): React.ReactNode {
     return (
       <div className="task-options">
-        <input type="text" />
-        <button onClick={this.handleAdd}>Add new task</button>
+        <input type="text" className="task-input-new" placeholder="Enter new task..."/>
+        <button onClick={this.handleAdd} className="task-button-new">Add task</button>
       </div>
     );
   }
