@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import TaskList from "../TaskList/TaskList";
 import TaskOptions from "../TaskOptions/TaskOptions";
 import { CreateTaskType, ITask } from "../../types/Task.types";
-import { BASE_URL } from "../../utils/constants";
 import "./TaskTracker.css";
+import { addTask, fetchTasks } from "../../services/Task.service";
 
 interface ITaskProps {}
 
@@ -22,7 +22,7 @@ class TaskTracker extends Component<ITaskProps, ITaskState> {
     this.refreshTasks();
   }
   private refreshTasks(): void {
-    this.fetchTasks()
+    fetchTasks()
       .then((res: ITask[]) => {
         this.setState({ tasks: res });
       })
@@ -31,32 +31,7 @@ class TaskTracker extends Component<ITaskProps, ITaskState> {
         console.log(e);
       });
   }
-  private async fetchTasks(): Promise<ITask[]> {
-    try {
-      const res: Response = await fetch(`${BASE_URL}/todos`);
-      return res.json() as Promise<ITask[]>;
-    } catch (e) {
-      console.log("Fetch error: ", e);
-      throw e;
-    }
-  }
-  private async addTask(task: CreateTaskType): Promise<ITask> {
-    try {
-      const res: Response = await fetch(`${BASE_URL}/todos`, {
-        method: "POST",
-        body: JSON.stringify({
-          title: task.title,
-          completed: task.completed,
-          userId: task.userId,
-        }),
-        headers: { "Content-type": "application/json; charset=UTF-8" },
-      });
-      return res.json() as Promise<ITask>;
-    } catch (e) {
-      console.log("Add task error: ", e);
-      throw e;
-    }
-  }
+
   private handleAdd: (title: string, userId: number) => void = (title, userId) => {
     const updatedTasks: ITask[] = this.state.tasks.slice();
     const newTask: CreateTaskType = {
@@ -64,7 +39,7 @@ class TaskTracker extends Component<ITaskProps, ITaskState> {
       userId,
       completed: false,
     };
-    this.addTask(newTask)
+    addTask(newTask)
       .then((res: ITask) => {
         updatedTasks.unshift(res);
         this.setState({ tasks: updatedTasks });
