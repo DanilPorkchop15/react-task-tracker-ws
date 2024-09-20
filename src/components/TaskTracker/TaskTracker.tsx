@@ -3,6 +3,7 @@ import TaskList from "../TaskList/TaskList";
 import TaskOptions from "../TaskOptions/TaskOptions";
 import { CreateTaskType, ITask } from "../../types/Task.types";
 import { BASE_URL } from "../../utils/constants";
+import "./TaskTracker.css"
 
 interface ITaskProps {}
 
