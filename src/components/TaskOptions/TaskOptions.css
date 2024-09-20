@@ -11,7 +11,6 @@
 .task-options .task-input-new {
   flex-grow: 1;
   padding: 10px;
-  border-radius: 10px 0 0 10px;
   border: none;
   outline: none;
 }
