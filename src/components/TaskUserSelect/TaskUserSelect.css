@@ -1,0 +1,8 @@
+.task-user-select {
+  flex-grow: 1;
+  padding: 10px;
+  border-radius: 10px 0 0 10px;
+  border: none;
+  outline: none;
+  width: 120px;
+}
