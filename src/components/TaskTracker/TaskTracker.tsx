@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import TaskList from "../TaskList/TaskList";
 import TaskOptions from "../TaskOptions/TaskOptions";
 import { CreateTaskType, ITask } from "../../types/Task.types";
+import { BASE_URL } from "../../utils/constants";
 
 interface ITaskProps {}
 
@@ -10,16 +11,52 @@ interface ITaskState {
 }
 
 class TaskTracker extends Component<ITaskProps, ITaskState> {
+  constructor(props: ITaskProps) {
+    super(props);
+    this.state = {
+      tasks: [],
+    };
+  }
+  componentDidMount(): void {
+    this.refreshTasks();
+  }
+  private refreshTasks(): void {
+    this.fetchTasks()
+      .then((res: ITask[]) => {
+        this.setState({ tasks: res }, () =>
+          console.log("State +" + this.state.tasks)
+        );
+      })
+      .catch((e: Error) => {
+        alert("Ошибка получения задач!!!");
+        console.log(e);
+      });
+  }
+  private async fetchTasks(): Promise<ITask[]> {
+    try {
+      const res: Response = await fetch(`${BASE_URL}/todos`);
+      return res.json() as Promise<ITask[]>;
+    } catch (e) {
+      console.log("Fetch error: ", e);
+      throw e;
+    }
+  }
   private async addTask(task: CreateTaskType): Promise<ITask> {
-    const res: Response = await fetch(
-      "https://jsonplaceholder.typicode.com/todos",
-      {
+    try {
+      const res: Response = await fetch(`${BASE_URL}/todos`, {
         method: "POST",
-        body: JSON.stringify({ title: "foo", completed: false, userId: 1 }),
+        body: JSON.stringify({
+          title: task.title,
+          completed: task.completed,
+          userId: task.userId,
+        }),
         headers: { "Content-type": "application/json; charset=UTF-8" },
-      }
-    );
-    return res.json() as Promise<ITask>;
+      });
+      return res.json() as Promise<ITask>;
+    } catch (e) {
+      console.log("Add task error: ", e);
+      throw e;
+    }
   }
   private handleAdd(title: string, userId: number) {
     const updatedTasks: ITask[] = this.state.tasks.slice();
@@ -43,7 +80,7 @@ class TaskTracker extends Component<ITaskProps, ITaskState> {
       <>
         <h1>React Task Tracker</h1>
         <TaskOptions onAdd={this.handleAdd} />
-        <TaskList tasks={[]} onDelete={() => {}} />
+        <TaskList tasks={this.state.tasks} onDelete={this.refreshTasks} />
       </>
     );
   }
