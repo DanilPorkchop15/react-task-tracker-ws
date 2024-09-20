@@ -3,7 +3,7 @@ import TaskList from "../TaskList/TaskList";
 import TaskOptions from "../TaskOptions/TaskOptions";
 import { CreateTaskType, ITask } from "../../types/Task.types";
 import { BASE_URL } from "../../utils/constants";
-import "./TaskTracker.css"
+import "./TaskTracker.css";
 
 interface ITaskProps {}
 
@@ -24,9 +24,7 @@ class TaskTracker extends Component<ITaskProps, ITaskState> {
   private refreshTasks(): void {
     this.fetchTasks()
       .then((res: ITask[]) => {
-        this.setState({ tasks: res }, () =>
-          console.log("State +" + this.state.tasks)
-        );
+        this.setState({ tasks: res });
       })
       .catch((e: Error) => {
         alert("Ошибка получения задач!!!");
@@ -59,7 +57,7 @@ class TaskTracker extends Component<ITaskProps, ITaskState> {
       throw e;
     }
   }
-  private handleAdd(title: string, userId: number) {
+  private handleAdd: (title: string, userId: number) => void = (title, userId) => {
     const updatedTasks: ITask[] = this.state.tasks.slice();
     const newTask: CreateTaskType = {
       title,
@@ -68,14 +66,14 @@ class TaskTracker extends Component<ITaskProps, ITaskState> {
     };
     this.addTask(newTask)
       .then((res: ITask) => {
-        updatedTasks.push(res);
+        updatedTasks.unshift(res);
         this.setState({ tasks: updatedTasks });
       })
       .catch((e: Error) => {
         alert("Возникла ошибка при добавлении задачи!!!");
         console.log(e);
       });
-  }
+  };
   render(): React.ReactNode {
     return (
       <>
