@@ -1,6 +1,6 @@
 import React, { ChangeEvent, Component } from "react";
-import { ITask } from "../../types/Task.types";
 import { IUser } from "../../types/User.types";
+import "./TaskOptions.css"
 
 interface ITaskProps {
   onAdd: (value: string, userId: number) => void;

@@ -1,9 +1,14 @@
 import React, { Component } from "react";
 import "./App.css";
+import TaskTracker from "./components/TaskTracker/TaskTracker";
 
 class App extends Component {
   render() {
-    return <div className="App">DDFSDFSD</div>;
+    return (
+      <div className="App">
+        <TaskTracker />
+      </div>
+    );
   }
 }
 

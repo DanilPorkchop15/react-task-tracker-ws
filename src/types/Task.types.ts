@@ -5,6 +5,6 @@ interface ITask {
   userId: number;
 }
 
-type createTaskType = Omit<ITask, "id">;
+type CreateTaskType = Omit<ITask, "id">;
 
-export type {ITask, createTaskType}
+export type {ITask, CreateTaskType}
