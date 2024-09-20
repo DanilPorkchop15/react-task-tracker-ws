@@ -3,16 +3,16 @@ import { ITask } from "../../types/Task.types";
 import Task from "../Task/Task";
 import "./TaskList.css";
 
-interface ITaskProps {
+interface ITaskListProps {
   tasks: ITask[];
-  onDelete: () => void;
+  onDelete: (id: number) => void;
 }
 
-interface ITaskState {}
+interface ITaskListState {}
 
-class TaskList extends Component<ITaskProps, ITaskState> {
-  private handleDelete() {
-    this.props.onDelete();
+class TaskList extends Component<ITaskListProps, ITaskListState> {
+  private handleDelete: (id: number) => void = (id) => {
+    this.props.onDelete(id);
   }
   render(): React.ReactNode {
     const { tasks } = this.props;

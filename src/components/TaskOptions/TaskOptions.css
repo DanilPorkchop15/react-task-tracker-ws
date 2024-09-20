@@ -13,6 +13,7 @@
   padding: 10px;
   border: none;
   outline: none;
+  border-radius: 10px 0 0 10px;
 }
 
 .task-options .task-button-new {
