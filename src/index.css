@@ -4,11 +4,13 @@
   --foreground-color: #424242;
   --background-color: #303030;
   --text-color: #fff;
-  --danger-color: #ff5252;
+  --danger-color: #c23232;
+  --success-color: #1e911e;
   --border-color: #424242;
   --shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   --input-background-color: #424242;
   --input-border-color: #303030;
+
 }
 
 * {

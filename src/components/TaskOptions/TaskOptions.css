@@ -4,26 +4,33 @@
   border-radius: 10px;
 }
 
-.task-options-add {
+.task-options-block {
   width: 100%;
 }
 
-.task-options-add > .input.task-input-new {
+.task-options-block > .input.task-input-new {
   flex-grow: 1;
   border-radius: 10px 0 0 0;
   box-shadow: var(--shadow);
 }
 
-.task-options-add > .button.task-button-new {
+.task-options-block > .button.task-button-new {
   border-radius: 0 10px 0 0;
   align-self: stretch;
 }
 
-.task-options-add > .task-options-user-select {
+.task-options-block > .task-options-user-select {
   max-width: 250px;
 }
 
-.button.task-options-mark-all {
-  width: 100%;
-  border-radius: 0 0 10px 10px;
+.task-options-block > .button.task-options-mark-all {
+  flex-grow: 1;
+  background: var(--success-color);
+  border-radius: 0 0 0 10px;
+}
+
+.task-options-block > .button.task-options-unmark-all {
+  flex-grow: 1;
+  background: var(--danger-color);
+  border-radius: 0 0 10px 0;
 }

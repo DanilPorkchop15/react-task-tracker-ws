@@ -58,25 +58,25 @@ class TaskTracker extends Component<ITaskProps, ITaskState> {
       });
   };
 
-  private handleMarkAll: () => void = () => {
+  private handleMarkAll: (value: boolean) => void = (value) => {
     const doMarkAll = window.confirm(
-      "Вы уверены, что хотите отметить все задачи как выполненные?"
+      `Вы уверены, что хотите отметить все задачи как ${
+        value ? "" : "не"
+      } выполненные?`
     );
 
     if (doMarkAll) {
       try {
         const updatedTasks: ITask[] = this.state.tasks.map((task) => ({
           ...task,
-          completed: true,
+          completed: value,
         }));
 
         this.setState({ tasks: updatedTasks }, () => {
           updatedTasks.forEach((task) => {
-            updateTask(task)
-              .then(() => console.log(`Task ${task.id} updated`))
-              .catch((e: Error) => {
-                console.error(`Error updating task ${task.id}:`, e);
-              });
+            updateTask(task).catch((e: Error) => {
+              console.error(`Error updating task ${task.id}:`, e);
+            });
           });
         });
       } catch (e) {
@@ -123,8 +123,10 @@ class TaskTracker extends Component<ITaskProps, ITaskState> {
   render(): React.ReactNode {
     return (
       <div className="task-tracker fl-col a-center">
-        <TaskOptions onAdd={this.handleAdd} onMarkAll={this.handleMarkAll} />
-        <h2>Task list</h2>
+        <h1 className="task-tracker-title">Task Tracker</h1>
+        <h2 className="task-tracker-title">Options</h2>
+        <TaskOptions onAdd={this.handleAdd} onMarkEvent={this.handleMarkAll} />
+        <h2 className="task-tracker-title">Tasks</h2>
         {this.state.tasks && this.state.tasks.length > 0 ? (
           <TaskList
             tasks={this.state.tasks}

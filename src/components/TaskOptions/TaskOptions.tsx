@@ -4,7 +4,7 @@ import TaskUserSelect from "../TaskUserSelect/TaskUserSelect";
 
 interface ITaskProps {
   onAdd: (value: string, userId: number) => void;
-  onMarkAll: () => void;
+  onMarkEvent: (value: boolean) => void;
 }
 
 interface ITaskState {
@@ -38,7 +38,7 @@ class TaskOptions extends Component<ITaskProps, ITaskState> {
   render(): React.ReactNode {
     return (
       <div className="task-options fl-col fl-center">
-        <div className="task-options-add fl a-center j-between">
+        <div className="task-options-block fl a-center j-between">
           <input
             type="text"
             className="task-input-new input"
@@ -54,9 +54,21 @@ class TaskOptions extends Component<ITaskProps, ITaskState> {
             Add task
           </button>
         </div>
-        <button className="task-options-mark-all button" onClick={() => this.props.onMarkAll()}>
-          Mark all as completed
-        </button>
+
+        <div className="task-options-block fl a-center">
+          <button
+            className="task-options-mark-all button"
+            onClick={() => this.props.onMarkEvent(true)}
+          >
+            Check all
+          </button>
+          <button
+            className="task-options-unmark-all button"
+            onClick={() => this.props.onMarkEvent(false)}
+          >
+            Uncheck all
+          </button>
+        </div>
       </div>
     );
   }
