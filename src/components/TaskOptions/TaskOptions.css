@@ -1,16 +1,29 @@
 .task-options {
   margin-bottom: 20px;
   width: 80%;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
 }
 
-.task-options > .input.task-input-new {
-  flex-grow: 1;
-  border-radius: 10px 0 0 10px;
+.task-options-add {
+  width: 100%;
 }
 
-.task-options > .button.task-button-new {
-  border-radius: 0 10px 10px 0;
+.task-options-add > .input.task-input-new {
+  flex-grow: 1;
+  border-radius: 10px 0 0 0;
+  box-shadow: var(--shadow);
+}
+
+.task-options-add > .button.task-button-new {
+  border-radius: 0 10px 0 0;
   align-self: stretch;
+}
+
+.task-options-add > .task-options-user-select {
+  max-width: 250px;
+}
+
+.button.task-options-mark-all {
+  width: 100%;
+  border-radius: 0 0 10px 10px;
 }

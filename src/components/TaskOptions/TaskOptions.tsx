@@ -4,6 +4,7 @@ import TaskUserSelect from "../TaskUserSelect/TaskUserSelect";
 
 interface ITaskProps {
   onAdd: (value: string, userId: number) => void;
+  onMarkAll: () => void;
 }
 
 interface ITaskState {
@@ -33,22 +34,28 @@ class TaskOptions extends Component<ITaskProps, ITaskState> {
   private handleSelect: (userId: number) => void = (userId) => {
     this.setState({ ...this.state, userId });
   };
+
   render(): React.ReactNode {
     return (
-      <div className="task-options fl a-center j-between">
-        <input
-          type="text"
-          className="task-input-new input"
-          placeholder="Enter new task..."
-          value={this.state.value}
-          onChange={this.handleChange}
-        />
-        <TaskUserSelect
-          onSelect={this.handleSelect}
-          className="task-options-user-select"
-        />
-        <button onClick={this.handleAdd} className="task-button-new button">
-          Add task
+      <div className="task-options fl-col fl-center">
+        <div className="task-options-add fl a-center j-between">
+          <input
+            type="text"
+            className="task-input-new input"
+            placeholder="Enter new task..."
+            value={this.state.value}
+            onChange={this.handleChange}
+          />
+          <TaskUserSelect
+            onSelect={this.handleSelect}
+            className="task-options-user-select"
+          />
+          <button onClick={this.handleAdd} className="task-button-new button">
+            Add task
+          </button>
+        </div>
+        <button className="task-options-mark-all button" onClick={() => this.props.onMarkAll()}>
+          Mark all as completed
         </button>
       </div>
     );

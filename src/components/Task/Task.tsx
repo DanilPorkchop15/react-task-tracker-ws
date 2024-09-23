@@ -8,10 +8,10 @@ import TaskEdit from "../TaskEdit/TaskEdit";
 
 interface ITaskProps extends ITask {
   onDelete: (id: number) => void;
+  onToggle: (id: number) => void;
 }
 
 type ITaskState = {
-  isToggled: boolean;
   doEdit: boolean;
   username: string | null;
   title: string;
@@ -21,25 +21,14 @@ class Task extends Component<ITaskProps, ITaskState> {
   constructor(props: ITaskProps) {
     super(props);
     this.state = {
-      isToggled: this.props.completed,
       doEdit: false,
       username: null,
       title: this.props.title,
     };
   }
+
   private handleToggle: () => void = () => {
-    updateTask({
-      id: this.props.id,
-      title: this.props.title,
-      completed: !this.state.isToggled,
-      userId: this.props.userId,
-    })
-      .then(() => {
-        this.setState({ isToggled: !this.state.isToggled });
-      })
-      .catch((e: Error) => {
-        console.log("Task update error " + e);
-      });
+    this.props.onToggle(this.props.id);
   };
   private handleDelete: () => void = () => {
     this.props.onDelete(this.props.id);
@@ -53,7 +42,7 @@ class Task extends Component<ITaskProps, ITaskState> {
         updateTask({
           id: this.props.id,
           title,
-          completed: this.state.isToggled,
+          completed: this.props.completed,
           userId,
         });
         this.setState({
@@ -102,8 +91,8 @@ class Task extends Component<ITaskProps, ITaskState> {
                 type="checkbox"
                 name="completed"
                 id="completed"
-                checked={this.state.isToggled}
                 onChange={this.handleToggle}
+                checked={this.props.completed}
               />
               <div className="task-actions fl">
                 <button

@@ -6,6 +6,7 @@ import "./TaskList.css";
 interface ITaskListProps {
   tasks: ITask[];
   onDelete: (id: number) => void;
+  onToggle: (id: number) => void;
 }
 
 interface ITaskListState {}
@@ -13,6 +14,10 @@ interface ITaskListState {}
 class TaskList extends Component<ITaskListProps, ITaskListState> {
   private handleDelete: (id: number) => void = (id) => {
     this.props.onDelete(id);
+  };
+
+  private handleToggle: (id: number) => void = (id) => {
+    this.props.onToggle(id);
   };
   render(): React.ReactNode {
     const { tasks } = this.props;
@@ -27,6 +32,7 @@ class TaskList extends Component<ITaskListProps, ITaskListState> {
               userId={task.userId}
               completed={task.completed}
               onDelete={this.handleDelete}
+              onToggle={this.handleToggle}
             />
           ))}
       </div>
