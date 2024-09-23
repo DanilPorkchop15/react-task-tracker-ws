@@ -84,7 +84,9 @@ class Task extends Component<ITaskProps, ITaskState> {
   render(): React.ReactNode {
     return (
       <div className="task fl-col j-between">
-        <div className="task-section fl a-baseline j-between">
+
+        <section className="task-section fl a-baseline j-between">
+
           <div className="task-block fl a-baseline">
             <span>{this.props.id}</span>
             <p>{this.state.title}</p>
@@ -121,10 +123,12 @@ class Task extends Component<ITaskProps, ITaskState> {
                 </button>
               </div>
             </div>
+            
           </div>
-        </div>
 
-        <div className="task-section fl a-baseline j-between">
+        </section>
+
+        <section className="task-section fl a-baseline j-between">
           {this.state.doEdit && (
             <TaskEdit
               onEdit={this.handleEdit}
@@ -132,7 +136,8 @@ class Task extends Component<ITaskProps, ITaskState> {
               username={this.state.username}
             />
           )}
-        </div>
+        </section>
+
       </div>
     );
   }
