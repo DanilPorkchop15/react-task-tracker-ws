@@ -38,13 +38,13 @@ class TaskOptions extends Component<ITaskProps, ITaskState> {
       <div className="task-options">
         <input
           type="text"
-          className="task-input-new"
+          className="task-input-new input"
           placeholder="Enter new task..."
           value={this.state.value}
           onChange={this.handleChange}
         />
-        <TaskUserSelect onSelect={this.handleSelect} />
-        <button onClick={this.handleAdd} className="task-button-new">
+        <TaskUserSelect onSelect={this.handleSelect} className="task-options-user-select"/>
+        <button onClick={this.handleAdd} className="task-button-new button">
           Add task
         </button>
       </div>
