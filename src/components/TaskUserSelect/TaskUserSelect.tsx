@@ -5,10 +5,13 @@ import { fetchUsers } from "../../services/User.service";
 
 interface IUserSelectProps {
   onSelect: (userId: number) => void;
+  defaultValue?: string | null;
+  className?: string | null;
 }
 
 interface IUserSelectState {
   users: IUser[] | null;
+  selectedUser: IUser | null;
 }
 
 class TaskUserSelect extends Component<IUserSelectProps, IUserSelectState> {
@@ -16,10 +19,15 @@ class TaskUserSelect extends Component<IUserSelectProps, IUserSelectState> {
     super(props);
     this.state = {
       users: null,
+      selectedUser: null,
     };
   }
 
   private handleSelect: (e: ChangeEvent<HTMLSelectElement>) => void = (e) => {
+    const selectedUser = this.state.users?.find(
+      (user) => user.id === +e.target.value
+    );
+    this.setState({ selectedUser: selectedUser as IUser });
     this.props.onSelect(+e.target.value);
   };
 
@@ -27,7 +35,15 @@ class TaskUserSelect extends Component<IUserSelectProps, IUserSelectState> {
     fetchUsers()
       .then((users: IUser[]) => {
         this.setState({ users });
-        this.props.onSelect(+users[0].id);
+        const defaultValue = this.props.defaultValue
+          ? users?.find(
+              (user) => user.username === this.props.defaultValue
+            )
+          : this.state.users?.[0];
+        if (defaultValue) {
+          this.setState({ selectedUser: defaultValue });
+          this.props.onSelect(defaultValue.id);
+        }
       })
       .catch((e: Error) => {
         console.log("User fetch error " + e);
@@ -38,8 +54,9 @@ class TaskUserSelect extends Component<IUserSelectProps, IUserSelectState> {
     return (
       <select
         name="selectUser"
-        className="task-user-select"
+        className={`task-user-select ${this.props.className}`}
         onChange={this.handleSelect}
+        value={this.state.selectedUser?.id}
       >
         {this.state.users &&
           this.state.users.map((user) => (
@@ -53,3 +70,4 @@ class TaskUserSelect extends Component<IUserSelectProps, IUserSelectState> {
 }
 
 export default TaskUserSelect;
+
