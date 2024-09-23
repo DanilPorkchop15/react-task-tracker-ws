@@ -4,6 +4,7 @@ import TaskOptions from "../TaskOptions/TaskOptions";
 import { CreateTaskType, ITask } from "../../types/Task.types";
 import "./TaskTracker.css";
 import { addTask, deleteTask, fetchTasks } from "../../services/Task.service";
+import Loader from "../Loader/Loader";
 
 interface ITaskProps {}
 
@@ -72,9 +73,9 @@ class TaskTracker extends Component<ITaskProps, ITaskState> {
   render(): React.ReactNode {
     return (
       <div className="task-tracker fl-col a-center">
-        <h1>React Task Tracker</h1>
         <TaskOptions onAdd={this.handleAdd} />
-        <TaskList tasks={this.state.tasks} onDelete={this.handleDelete} />
+        <h2>Task list</h2>
+        {this.state.tasks && this.state.tasks.length > 0 ? <TaskList tasks={this.state.tasks} onDelete={this.handleDelete} /> : <Loader/>}
       </div>
     );
   }
