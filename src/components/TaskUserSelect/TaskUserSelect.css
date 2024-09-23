@@ -1,7 +1,6 @@
 .task-user-select {
   flex-grow: 1;
   padding: 10px;
-  border: none;
   outline: none;
   min-width: 120px;
   background-color: var(--input-background-color);

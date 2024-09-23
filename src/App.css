@@ -1,12 +1,9 @@
 .App {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  align-items: center;
-  justify-content: center;
   min-height: 100vh;
-  font-family: 'Lato', sans-serif;
-  padding-top: 40px;
+  max-width: 1176px;
+  padding-inline: 20px;
+  margin-inline: auto;
+  font-family: "Lato", sans-serif;
 }
 
 .input {
@@ -36,4 +33,34 @@
 
 .button:disabled {
   filter: grayscale(1);
+}
+
+.fl {
+  display: flex;
+}
+
+.fl-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.fl-center {
+  justify-content: center;
+  align-items: center;
+}
+
+.a-center {
+  align-items: center;
+}
+
+.j-center {
+  justify-content: center;
+}
+
+.j-between {
+  justify-content: space-between;
+}
+
+.a-baseline {
+  align-items: baseline;
 }

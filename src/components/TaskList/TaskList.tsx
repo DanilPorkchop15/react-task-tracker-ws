@@ -17,7 +17,7 @@ class TaskList extends Component<ITaskListProps, ITaskListState> {
   render(): React.ReactNode {
     const { tasks } = this.props;
     return (
-      <div className="task-list">
+      <div className="task-list fl-col">
         {tasks &&
           tasks.map((task) => (
             <Task

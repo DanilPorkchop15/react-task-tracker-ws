@@ -35,7 +35,7 @@ class TaskOptions extends Component<ITaskProps, ITaskState> {
   }
   render(): React.ReactNode {
     return (
-      <div className="task-options">
+      <div className="task-options fl a-center j-between">
         <input
           type="text"
           className="task-input-new input"

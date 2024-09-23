@@ -5,7 +5,7 @@ import TaskTracker from "./components/TaskTracker/TaskTracker";
 class App extends Component {
   render() {
     return (
-      <div className="App">
+      <div className="App fl-col fl-center">
         <TaskTracker />
       </div>
     );

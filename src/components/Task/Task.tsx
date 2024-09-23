@@ -83,24 +83,24 @@ class Task extends Component<ITaskProps, ITaskState> {
 
   render(): React.ReactNode {
     return (
-      <div className="task">
+      <div className="task fl-col j-between">
 
-        <div className="task-section">
+        <div className="task-section fl a-baseline j-between">
 
-          <div className="task-block">
+          <div className="task-block fl a-baseline">
             <span>{this.props.id}</span>
             <p>{this.state.title}</p>
           </div>
 
-          <div className="task-block">
+          <div className="task-block fl a-baseline">
 
-            <div className="task-block">
+            <div className="task-block fl a-baseline">
               <span>
                 {this.state.username ? this.state.username : "loading..."}
               </span>
             </div>
 
-            <div className="task-block">
+            <div className="task-block fl a-baseline">
               <input
                 type="checkbox"
                 name="completed"
@@ -108,7 +108,7 @@ class Task extends Component<ITaskProps, ITaskState> {
                 checked={this.state.isToggled}
                 onChange={this.handleToggle}
               />
-              <div className="task-actions">
+              <div className="task-actions fl">
                 <button
                   className="task-edit button"
                   onClick={this.toggleEdit}
@@ -126,7 +126,7 @@ class Task extends Component<ITaskProps, ITaskState> {
 
         </div>
 
-        <div className="task-section">
+        <div className="task-section fl a-baseline j-between">
           {this.state.doEdit && (
             <TaskEdit onEdit={this.handleEdit} title={this.props.title}  username={this.state.username}/>
           )}

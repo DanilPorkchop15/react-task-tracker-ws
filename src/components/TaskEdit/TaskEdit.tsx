@@ -37,8 +37,8 @@ class TaskEdit extends Component<ITaskEditProps, ITaskEditState> {
   };
   render() {
     return (
-      <form onSubmit={this.handleEdit} className="task-form-edit">
-        <label htmlFor="newTitle" className="task-label">
+      <form onSubmit={this.handleEdit} className="task-form-edit fl-col">
+        <label htmlFor="newTitle" className="task-label fl-col">
           New title
           <input
             ref={this.inputRef}
@@ -48,7 +48,7 @@ class TaskEdit extends Component<ITaskEditProps, ITaskEditState> {
             name="newTitle"
           />
         </label>
-        <label className="task-label">
+        <label className="task-label fl-col">
           Author
           <TaskUserSelect
             onSelect={this.handleSelect}

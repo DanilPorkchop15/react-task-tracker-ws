@@ -71,11 +71,11 @@ class TaskTracker extends Component<ITaskProps, ITaskState> {
   };
   render(): React.ReactNode {
     return (
-      <>
+      <div className="task-tracker fl-col a-center">
         <h1>React Task Tracker</h1>
         <TaskOptions onAdd={this.handleAdd} />
         <TaskList tasks={this.state.tasks} onDelete={this.handleDelete} />
-      </>
+      </div>
     );
   }
 }

@@ -1,6 +1,4 @@
 .task {
-  display: flex;
-  flex-direction: column;
   width: 100%;
   gap: 10px;
   margin-bottom: 10px;
@@ -9,7 +7,6 @@
   background-color: var(--foreground-color);
   transition: background-color 0.2s ease-in-out;
   border: 1px solid var(--primary-color);
-  justify-content: space-between;
 }
 
 .task:hover {
@@ -19,19 +16,13 @@
 
 .task-section {
   flex-grow: 1;
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
 }
 
 .task-block {
-  display: flex;
-  align-items: baseline;
   gap: 40px;
 }
 
 .task-actions {
-  display: flex;
   gap: 10px;
 }
 
