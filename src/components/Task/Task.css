@@ -1,7 +1,8 @@
 .task {
   display: flex;
+  flex-direction: column;
   width: 100%;
-  align-items: baseline;
+  gap: 10px;
   margin-bottom: 10px;
   padding: 10px;
   border-radius: 10px;
@@ -16,33 +17,25 @@
   box-shadow: 0 2px 14px rgba(0, 0, 0, 0.3);
 }
 
-
-.task-actions {
+.task-section {
+  flex-grow: 1;
   display: flex;
+  align-items: baseline;
+  justify-content: space-between;
 }
+
 .task-block {
   display: flex;
   align-items: baseline;
   gap: 40px;
 }
-.task-actions > button {
-  margin-left: 10px;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: background-color 0.2s ease-in-out;
+
+.task-actions {
+  display: flex;
+  gap: 10px;
 }
 
-.task-actions > .task-edit {
-  background-color: var(--primary-color);
-}
-
-.task-actions > .task-delete {
+.task-actions > .button.task-delete {
   background-color: var(--danger-color);
 }
 
-.task-actions > button:hover {
-  filter: brightness(1.1);
-}

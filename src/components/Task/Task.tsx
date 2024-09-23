@@ -4,6 +4,7 @@ import "./Task.css";
 import { fetchUser } from "../../services/User.service";
 import { IUser } from "../../types/User.types";
 import { updateTask } from "../../services/Task.service";
+import TaskEdit from "../TaskEdit/TaskEdit";
 
 interface ITaskProps extends ITask {
   onDelete: (id: number) => void;
@@ -11,7 +12,9 @@ interface ITaskProps extends ITask {
 
 type ITaskState = {
   isToggled: boolean;
+  doEdit: boolean;
   username: string | null;
+  title: string;
 };
 
 class Task extends Component<ITaskProps, ITaskState> {
@@ -19,7 +22,9 @@ class Task extends Component<ITaskProps, ITaskState> {
     super(props);
     this.state = {
       isToggled: this.props.completed,
+      doEdit: false,
       username: null,
+      title: this.props.title,
     };
   }
   private handleToggle: () => void = () => {
@@ -39,8 +44,32 @@ class Task extends Component<ITaskProps, ITaskState> {
   private handleDelete: () => void = () => {
     this.props.onDelete(this.props.id);
   };
-  private handleEdit: () => void = () => {
-    this.setState({ isToggled: !this.state.isToggled });
+  private handleEdit: (title: string, username: number) => void = (
+    title,
+    userId
+  ) => {
+    fetchUser(userId)
+      .then(({ username }) => {
+        updateTask({
+          id: this.props.id,
+          title,
+          completed: this.state.isToggled,
+          userId,
+        });
+        this.setState({
+          ...this.state,
+          doEdit: !this.state.doEdit,
+          title,
+          username,
+        });
+      })
+      .catch((e: Error) => {
+        console.log("Task edit error " + e);
+      });
+  };
+
+  private toggleEdit = () => {
+    this.setState({ doEdit: !this.state.doEdit });
   };
   componentDidMount(): void {
     fetchUser(this.props.userId)
@@ -51,31 +80,58 @@ class Task extends Component<ITaskProps, ITaskState> {
         console.log("User fetch error " + e);
       });
   }
+
   render(): React.ReactNode {
     return (
       <div className="task">
-        <div className="task-block">
-          <span>{this.props.id}</span>
-          <p>{this.props.title}</p>
-        </div>
-        <div className="task-block">
+
+        <div className="task-section">
+
           <div className="task-block">
-            <span>{this.state.username? this.state.username : "loading..."}</span>
+            <span>{this.props.id}</span>
+            <p>{this.state.title}</p>
           </div>
+
           <div className="task-block">
-            <input
-              type="checkbox"
-              name="completed"
-              id="completed"
-              checked={this.state.isToggled}
-              onChange={this.handleToggle}
-            />
-            <div className="task-actions">
-              <button className="task-edit">Edit</button>
-              <button className="task-delete" onClick={this.handleDelete}>Delete</button>
+
+            <div className="task-block">
+              <span>
+                {this.state.username ? this.state.username : "loading..."}
+              </span>
             </div>
+
+            <div className="task-block">
+              <input
+                type="checkbox"
+                name="completed"
+                id="completed"
+                checked={this.state.isToggled}
+                onChange={this.handleToggle}
+              />
+              <div className="task-actions">
+                <button
+                  className="task-edit button"
+                  onClick={this.toggleEdit}
+                  disabled={this.state.username === null}
+                >
+                  {this.state.doEdit ? "Cancel" : "Edit"}
+                </button>
+                <button className="task-delete button" onClick={this.handleDelete}>
+                  Delete
+                </button>
+              </div>
+            </div>
+
           </div>
+
         </div>
+
+        <div className="task-section">
+          {this.state.doEdit && (
+            <TaskEdit onEdit={this.handleEdit} title={this.props.title}  username={this.state.username}/>
+          )}
+        </div>
+
       </div>
     );
   }
