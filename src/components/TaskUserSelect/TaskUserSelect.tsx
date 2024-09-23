@@ -54,8 +54,9 @@ class TaskUserSelect extends Component<IUserSelectProps, IUserSelectState> {
         name="selectUser"
         className={`task-user-select ${this.props.className}`}
         onChange={this.handleSelect}
-        value={this.state.selectedUser?.id ?? "loading"}
+        value={this.state.selectedUser?.id ?? "default"}
       >
+        <option value="default" disabled>Select user</option>
         {this.state.users ? (
           this.state.users.map((user) => (
             <option value={user.id} key={user.id}>
