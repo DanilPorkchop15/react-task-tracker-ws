@@ -57,25 +57,30 @@ class TaskTracker extends Component<ITaskProps, ITaskState> {
   private handleDelete: (id: number) => void = (id) => {
     const updatedTasks: ITask[] = this.state.tasks.slice();
     const doDelete = window.confirm("Вы уверены, что хотите удалить задачу?");
-    doDelete && deleteTask(id)
-      .then(() => {
-        updatedTasks.splice(
-          updatedTasks.findIndex((task) => task.id === id),
-          1
-        );
-        this.setState({ tasks: updatedTasks });
-      })
-      .catch((e: Error) => {
-        alert("Возникла ошибка при удалении задачи!!!");
-        console.log(e);
-      });
+    doDelete &&
+      deleteTask(id)
+        .then(() => {
+          updatedTasks.splice(
+            updatedTasks.findIndex((task) => task.id === id),
+            1
+          );
+          this.setState({ tasks: updatedTasks });
+        })
+        .catch((e: Error) => {
+          alert("Возникла ошибка при удалении задачи!!!");
+          console.log(e);
+        });
   };
   render(): React.ReactNode {
     return (
       <div className="task-tracker fl-col a-center">
         <TaskOptions onAdd={this.handleAdd} />
         <h2>Task list</h2>
-        {this.state.tasks && this.state.tasks.length > 0 ? <TaskList tasks={this.state.tasks} onDelete={this.handleDelete} /> : <Loader/>}
+        {this.state.tasks && this.state.tasks.length > 0 ? (
+          <TaskList tasks={this.state.tasks} onDelete={this.handleDelete} />
+        ) : (
+          <Loader />
+        )}
       </div>
     );
   }

@@ -13,7 +13,7 @@ interface ITaskListState {}
 class TaskList extends Component<ITaskListProps, ITaskListState> {
   private handleDelete: (id: number) => void = (id) => {
     this.props.onDelete(id);
-  }
+  };
   render(): React.ReactNode {
     const { tasks } = this.props;
     return (

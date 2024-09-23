@@ -7,7 +7,9 @@ export async function fetchTasks(): Promise<ITask[]> {
     if (res.ok) {
       return res.json() as Promise<ITask[]>;
     } else {
-      throw new Error(`Fetching tasks failed with ${res.status} ${res.statusText}`);
+      throw new Error(
+        `Fetching tasks failed with ${res.status} ${res.statusText}`
+      );
     }
   } catch (e) {
     console.log("Fetch error: ", e);
@@ -41,7 +43,9 @@ export async function deleteTask(id: number): Promise<void> {
     if (res.ok) {
       return;
     } else {
-      throw new Error(`Deleting task failed with ${res.status} ${res.statusText}`);
+      throw new Error(
+        `Deleting task failed with ${res.status} ${res.statusText}`
+      );
     }
   } catch (e) {
     console.log("Delete task error: ", e);

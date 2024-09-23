@@ -84,9 +84,7 @@ class Task extends Component<ITaskProps, ITaskState> {
   render(): React.ReactNode {
     return (
       <div className="task fl-col j-between">
-
         <section className="task-section fl a-baseline j-between">
-
           <div className="task-block fl a-baseline">
             <span>{this.props.id}</span>
             <p>{this.state.title}</p>
@@ -123,9 +121,7 @@ class Task extends Component<ITaskProps, ITaskState> {
                 </button>
               </div>
             </div>
-            
           </div>
-
         </section>
 
         <section className="task-section fl a-baseline j-between">
@@ -137,7 +133,6 @@ class Task extends Component<ITaskProps, ITaskState> {
             />
           )}
         </section>
-
       </div>
     );
   }

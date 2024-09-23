@@ -7,4 +7,4 @@ interface ITask {
 
 type CreateTaskType = Omit<ITask, "id">;
 
-export type {ITask, CreateTaskType}
+export type { ITask, CreateTaskType };

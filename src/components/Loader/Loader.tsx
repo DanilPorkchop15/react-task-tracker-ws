@@ -3,9 +3,7 @@ import "./Loader.css";
 
 class Loader extends Component {
   render() {
-    return (
-      <div className="loader"/>
-    );
+    return <div className="loader" />;
   }
 }
 

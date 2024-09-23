@@ -36,9 +36,7 @@ class TaskUserSelect extends Component<IUserSelectProps, IUserSelectState> {
       .then((users: IUser[]) => {
         this.setState({ users });
         const defaultValue = this.props.defaultValue
-          ? users?.find(
-              (user) => user.username === this.props.defaultValue
-            )
+          ? users?.find((user) => user.username === this.props.defaultValue)
           : this.state.users?.[0];
         if (defaultValue) {
           this.setState({ selectedUser: defaultValue });
@@ -58,16 +56,14 @@ class TaskUserSelect extends Component<IUserSelectProps, IUserSelectState> {
         onChange={this.handleSelect}
         value={this.state.selectedUser?.id ?? "loading"}
       >
-        {this.state.users ?
+        {this.state.users ? (
           this.state.users.map((user) => (
             <option value={user.id} key={user.id}>
               User: {user.username}
             </option>
-          )) : 
-        (
-          <option value="loading">
-            loading...
-          </option>
+          ))
+        ) : (
+          <option value="loading">loading...</option>
         )}
       </select>
     );
@@ -75,4 +71,3 @@ class TaskUserSelect extends Component<IUserSelectProps, IUserSelectState> {
 }
 
 export default TaskUserSelect;
-

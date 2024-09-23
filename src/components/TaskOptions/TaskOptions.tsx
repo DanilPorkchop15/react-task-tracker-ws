@@ -20,19 +20,19 @@ class TaskOptions extends Component<ITaskProps, ITaskState> {
     };
   }
 
-  private handleAdd =() => {
+  private handleAdd = () => {
     if (this.state.value !== "" && this.state.userId) {
       this.props.onAdd(this.state.value, this.state.userId);
       this.setState({ ...this.state, value: "" });
     }
-  }
+  };
 
   private handleChange: (e: ChangeEvent<HTMLInputElement>) => void = (e) => {
     this.setState({ ...this.state, value: e.target.value });
-  }
+  };
   private handleSelect: (userId: number) => void = (userId) => {
     this.setState({ ...this.state, userId });
-  }
+  };
   render(): React.ReactNode {
     return (
       <div className="task-options fl a-center j-between">
@@ -43,7 +43,10 @@ class TaskOptions extends Component<ITaskProps, ITaskState> {
           value={this.state.value}
           onChange={this.handleChange}
         />
-        <TaskUserSelect onSelect={this.handleSelect} className="task-options-user-select"/>
+        <TaskUserSelect
+          onSelect={this.handleSelect}
+          className="task-options-user-select"
+        />
         <button onClick={this.handleAdd} className="task-button-new button">
           Add task
         </button>
