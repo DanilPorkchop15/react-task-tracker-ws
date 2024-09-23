@@ -84,16 +84,13 @@ class Task extends Component<ITaskProps, ITaskState> {
   render(): React.ReactNode {
     return (
       <div className="task fl-col j-between">
-
         <div className="task-section fl a-baseline j-between">
-
           <div className="task-block fl a-baseline">
             <span>{this.props.id}</span>
             <p>{this.state.title}</p>
           </div>
 
           <div className="task-block fl a-baseline">
-
             <div className="task-block fl a-baseline">
               <span>
                 {this.state.username ? this.state.username : "loading..."}
@@ -116,22 +113,26 @@ class Task extends Component<ITaskProps, ITaskState> {
                 >
                   {this.state.doEdit ? "Cancel" : "Edit"}
                 </button>
-                <button className="task-delete button" onClick={this.handleDelete}>
+                <button
+                  className="task-delete button"
+                  onClick={this.handleDelete}
+                >
                   Delete
                 </button>
               </div>
             </div>
-
           </div>
-
         </div>
 
         <div className="task-section fl a-baseline j-between">
           {this.state.doEdit && (
-            <TaskEdit onEdit={this.handleEdit} title={this.props.title}  username={this.state.username}/>
+            <TaskEdit
+              onEdit={this.handleEdit}
+              title={this.props.title}
+              username={this.state.username}
+            />
           )}
         </div>
-
       </div>
     );
   }

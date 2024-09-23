@@ -61,7 +61,7 @@ class TaskUserSelect extends Component<IUserSelectProps, IUserSelectState> {
         {this.state.users ?
           this.state.users.map((user) => (
             <option value={user.id} key={user.id}>
-              {user.username}
+              User: {user.username}
             </option>
           )) : 
         (
