@@ -9,7 +9,6 @@ interface ITaskEditProps {
 }
 
 interface ITaskEditState {
-  title: string;
   userId: number;
 }
 
@@ -17,7 +16,6 @@ class TaskEdit extends Component<ITaskEditProps, ITaskEditState> {
   constructor(props: ITaskEditProps) {
     super(props);
     this.state = {
-      title: props.title,
       userId: 0,
     };
   }
