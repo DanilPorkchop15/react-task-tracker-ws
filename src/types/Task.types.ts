@@ -1,10 +1,10 @@
-interface ITask {
+interface Task {
   id: number;
   title: string;
   completed: boolean;
   userId: number;
 }
 
-type CreateTaskType = Omit<ITask, "id">;
+type CreateTask= Omit<Task, "id">;
 
-export type { ITask, CreateTaskType };
+export type { Task, CreateTask };

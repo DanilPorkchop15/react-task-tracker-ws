@@ -2,18 +2,18 @@ import React, { ChangeEvent, Component } from "react";
 import "./TaskOptions.css";
 import TaskUserSelect from "../TaskUserSelect/TaskUserSelect";
 
-interface ITaskProps {
+interface TaskProps {
   onAdd: (value: string, userId: number) => void;
   onMarkEvent: (value: boolean) => void;
 }
 
-interface ITaskState {
+interface TaskState {
   value: string;
   userId: number | null;
 }
 
-class TaskOptions extends Component<ITaskProps, ITaskState> {
-  constructor(props: ITaskProps) {
+class TaskOptions extends Component<TaskProps, TaskState> {
+  constructor(props: TaskProps) {
     super(props);
     this.state = {
       value: "",
@@ -75,3 +75,4 @@ class TaskOptions extends Component<ITaskProps, ITaskState> {
 }
 
 export default TaskOptions;
+

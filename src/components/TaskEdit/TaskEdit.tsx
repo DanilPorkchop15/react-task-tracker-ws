@@ -2,18 +2,18 @@ import { Component, createRef, FormEvent } from "react";
 import TaskUserSelect from "../TaskUserSelect/TaskUserSelect";
 import "./TaskEdit.css";
 
-interface ITaskEditProps {
+interface TaskEditProps {
   onEdit: (title: string, userId: number) => void;
   title: string;
   username: string | null;
 }
 
-interface ITaskEditState {
+interface TaskEditState {
   userId: number;
 }
 
-class TaskEdit extends Component<ITaskEditProps, ITaskEditState> {
-  constructor(props: ITaskEditProps) {
+class TaskEdit extends Component<TaskEditProps, TaskEditState> {
+  constructor(props: TaskEditProps) {
     super(props);
     this.state = {
       userId: 0,
@@ -27,13 +27,15 @@ class TaskEdit extends Component<ITaskEditProps, ITaskEditState> {
     this.props.onEdit(title, this.state.userId);
   };
   componentDidMount(): void {
-    this.inputRef.current!.value = this.props.title;
+    if (this.inputRef.current) {
+      this.inputRef.current.value = this.props.title;
+    }
   }
 
   private handleSelect: (userId: number) => void = (userId: number) => {
     this.setState({ ...this.state, userId });
   };
-  render() {
+  render(): React.ReactNode {
     return (
       <form onSubmit={this.handleEdit} className="task-form-edit fl-col">
         <label htmlFor="newTitle" className="task-label fl-col">
@@ -63,3 +65,4 @@ class TaskEdit extends Component<ITaskEditProps, ITaskEditState> {
 }
 
 export default TaskEdit;
+

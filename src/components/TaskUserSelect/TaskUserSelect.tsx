@@ -1,21 +1,21 @@
 import React, { ChangeEvent, Component } from "react";
-import { IUser } from "../../types/User.types";
+import { User } from "../../types/User.types";
 import "./TaskUserSelect.css";
 import { fetchUsers } from "../../services/User.service";
 
-interface IUserSelectProps {
+interface UserSelectProps {
   onSelect: (userId: number) => void;
   defaultValue?: string | null;
   className?: string | null;
 }
 
-interface IUserSelectState {
-  users: IUser[] | null;
-  selectedUser: IUser | null;
+interface UserSelectState {
+  users: User[] | null;
+  selectedUser: User | null;
 }
 
-class TaskUserSelect extends Component<IUserSelectProps, IUserSelectState> {
-  constructor(props: IUserSelectProps) {
+class TaskUserSelect extends Component<UserSelectProps, UserSelectState> {
+  constructor(props: UserSelectProps) {
     super(props);
     this.state = {
       users: null,
@@ -27,13 +27,13 @@ class TaskUserSelect extends Component<IUserSelectProps, IUserSelectState> {
     const selectedUser = this.state.users?.find(
       (user) => user.id === +e.target.value
     );
-    this.setState({ selectedUser: selectedUser as IUser });
+    this.setState({ selectedUser: selectedUser as User });
     this.props.onSelect(+e.target.value);
   };
 
   componentDidMount(): void {
     fetchUsers()
-      .then((users: IUser[]) => {
+      .then((users: User[]) => {
         this.setState({ users });
         const defaultValue = this.props.defaultValue
           ? users?.find((user) => user.username === this.props.defaultValue)
@@ -72,3 +72,4 @@ class TaskUserSelect extends Component<IUserSelectProps, IUserSelectState> {
 }
 
 export default TaskUserSelect;
+

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import TaskList from "../TaskList/TaskList";
 import TaskOptions from "../TaskOptions/TaskOptions";
-import { CreateTaskType, ITask } from "../../types/Task.types";
+import { CreateTask, Task } from "../../types/Task.types";
 import "./TaskTracker.css";
 import {
   addTask,
@@ -11,14 +11,14 @@ import {
 } from "../../services/Task.service";
 import Loader from "../Loader/Loader";
 
-interface ITaskProps {}
+interface TaskProps {}
 
-interface ITaskState {
-  tasks: ITask[];
+interface TaskState {
+  tasks: Task[];
 }
 
-class TaskTracker extends Component<ITaskProps, ITaskState> {
-  constructor(props: ITaskProps) {
+class TaskTracker extends Component<TaskProps, TaskState> {
+  constructor(props: TaskProps) {
     super(props);
     this.state = {
       tasks: [],
@@ -29,7 +29,7 @@ class TaskTracker extends Component<ITaskProps, ITaskState> {
   }
   private refreshTasks(): void {
     fetchTasks()
-      .then((res: ITask[]) => {
+      .then((res: Task[]) => {
         this.setState({ tasks: res });
       })
       .catch((e: Error) => {
@@ -42,14 +42,14 @@ class TaskTracker extends Component<ITaskProps, ITaskState> {
     title,
     userId
   ) => {
-    const updatedTasks: ITask[] = this.state.tasks.slice();
-    const newTask: CreateTaskType = {
+    const updatedTasks: Task[] = this.state.tasks.slice();
+    const newTask: CreateTask = {
       title,
       userId,
       completed: false,
     };
     addTask(newTask)
-      .then((res: ITask) => {
+      .then((res: Task) => {
         updatedTasks.unshift(res);
         this.setState({ tasks: updatedTasks });
       })
@@ -67,7 +67,7 @@ class TaskTracker extends Component<ITaskProps, ITaskState> {
 
     if (doMarkAll) {
       try {
-        const updatedTasks: ITask[] = this.state.tasks.map((task) => ({
+        const updatedTasks: Task[] = this.state.tasks.map((task) => ({
           ...task,
           completed: value,
         }));
@@ -86,7 +86,7 @@ class TaskTracker extends Component<ITaskProps, ITaskState> {
   };
 
   private handleDelete: (id: number) => void = (id) => {
-    const updatedTasks: ITask[] = this.state.tasks.slice();
+    const updatedTasks: Task[] = this.state.tasks.slice();
     const doDelete = window.confirm("Вы уверены, что хотите удалить задачу?");
     doDelete &&
       deleteTask(id)
@@ -105,7 +105,7 @@ class TaskTracker extends Component<ITaskProps, ITaskState> {
   };
 
   private handleToggle: (id: number) => void = (id) => {
-    const updatedTasks: ITask[] = this.state.tasks.slice();
+    const updatedTasks: Task[] = this.state.tasks.slice();
     const task = updatedTasks.find((task) => task.id === id);
     if (task) {
       task.completed = !task.completed;
@@ -142,3 +142,4 @@ class TaskTracker extends Component<ITaskProps, ITaskState> {
 }
 
 export default TaskTracker;
+
