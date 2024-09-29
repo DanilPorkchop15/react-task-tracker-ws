@@ -1,0 +1,31 @@
+.task {
+  width: 100%;
+  gap: 10px;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: var(--foreground-color);
+  transition: background-color 0.2s ease-in-out;
+  border: 1px solid var(--primary-color);
+}
+
+.task:hover {
+  border: 1px solid black;
+  box-shadow: 0 2px 14px rgba(0, 0, 0, 0.3);
+}
+
+.task-section {
+  flex-grow: 1;
+}
+
+.task-block {
+  gap: 40px;
+}
+
+.task-actions {
+  gap: 10px;
+}
+
+.task-actions > .button.task-delete {
+  background-color: var(--danger-color);
+}

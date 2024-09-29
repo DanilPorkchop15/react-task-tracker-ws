@@ -1,0 +1,9 @@
+.task-tracker {
+  padding-top: 40px;
+  gap: 10px;
+  width: 100%;
+}
+
+.task-tracker-title {
+  margin-top: 20px;
+}
